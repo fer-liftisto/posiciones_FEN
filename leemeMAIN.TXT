@@ -1,0 +1,2 @@
+EL MAIN ES posiciones_FEN.py (punto de entrada)
+tiene entorno virtual activarlo Scripts .activate
