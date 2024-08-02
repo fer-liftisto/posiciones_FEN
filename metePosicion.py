@@ -11,7 +11,7 @@ from configuracionTablero import *
 def posicion(fen_posicion):
     
     #FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - 0 1'
-    partida= fen_posicion.get()
+    partida= fen_posicion.get() # es una StringVar
     
     
     print(partida)

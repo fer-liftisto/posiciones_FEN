@@ -19,8 +19,8 @@ PEON = '♟'
 LADO = 65
 LETRA = 'Helvetica'
 
-COLOR_BLANCO = '#7a4f37'
-COLOR_NEGRO = '#dfc07f'
+COLOR_BLANCO = '#dfc07f'
+COLOR_NEGRO = '#7a4f37'
 COLOR_PIEZA_BLANCA = 'blue'
 COLOR_PIEZA_NEGRA = 'black'
 

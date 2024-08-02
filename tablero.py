@@ -86,8 +86,8 @@ def tablero(app):
 			if (c+f) % 2 == 0:
 				cuadro[casilla] = Button(table,
 					text = ' ',
-					bg = COLOR_NEGRO,
-					command = partial(mueve, cuadro, casilla))
+					bg = COLOR_BLANCO,
+					command = partial(mueve, cuadro, casilla)) # mueve(cuadro,casilla)
 
 				cuadro[casilla].place(
 									x=(c)*LADO,
@@ -98,7 +98,7 @@ def tablero(app):
 			else:
 				cuadro[casilla] = Button(table,
 										text = ' ',
-										bg = COLOR_BLANCO,
+										bg = COLOR_NEGRO,
 										command = partial(mueve, cuadro, casilla))
 
 				cuadro[casilla].place(
@@ -112,7 +112,7 @@ def tablero(app):
 def introiduce_en_tablero(fen_posicion):	
 	grande = IntVar()
 	grande.set(LADO//2)
-	tabli = posicion(fen_posicion)
+	tabli = posicion(fen_posicion) # del modulo metePosicion.py se llama a la funcion, posicion(fen_posicion)
 	###Coloca Posicion################
 	for f, fi in enumerate(FILAS):
 		for c, co in enumerate(COLUMNAS):
