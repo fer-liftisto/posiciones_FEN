@@ -17,6 +17,7 @@ def posicion_inicial():
     lb.delete(0, tk.END) # para que quede bacio
     for index, fila in enumerate(posicion):
         lb.insert(index, fila)
+
 def tablero_inicial():
     fen_posicion.set('N-N,_,rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR,_') # es una StringVar()
     tablero.introiduce_en_tablero(fen_posicion) # funcion del modulo tablero 
@@ -119,7 +120,19 @@ def cargar_FEN():
             lb_fen.insert(tk.END,partida)
 
 def pasar_derecha(): ########(pasarPosicion) ############
-    fen_posicion.set('N-N,_,rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR,_') # es una StringVar()
+    FEN= list(lb.get(0, tk.END))
+    posicion= '/'.join(FEN)
+     
+    if jugadores.get() == '':
+        jugadores.set('N-N')
+    if torneo.get() == '':
+        torneo.set('_')
+    if parametros.get() == '':
+        parametros.set('_')
+     
+    FEN= f'{jugadores.get()},{torneo.get()},{posicion},{parametros.get()}'
+    
+    fen_posicion.set(FEN) # es una StringVar()
     tablero.introiduce_en_tablero(fen_posicion) # funcion del modulo tablero 
 
 def pasar_izquierda():
