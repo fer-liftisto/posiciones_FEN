@@ -19,7 +19,7 @@ def tablero(app):
 	
 	table = Frame(app)
 	table.place(x=455,y=15)
-	table.config(width=LADO*8, height=LADO*9,bd=10,bg='goldenrod2')
+	table.config(width=LADO*9, height=LADO*9,bd=10,bg='goldenrod2')
 	
 	
 	quita = BooleanVar(value=True)
