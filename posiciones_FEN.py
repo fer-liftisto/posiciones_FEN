@@ -214,7 +214,7 @@ lb_fen = tk.Listbox(v, width= 85, height= 12, bd= 10,
                     font= 'arial 15', bg= 'yellow')
 lb_fen.place(x= 30, y= 660)
 ##########################################################################################################
-btn = tk.Button(v, text= ' INICIAL TABLERO', bd= 5, bg= 'goldenrod2',width= 15, command= posicion_inicial)
+btn = tk.Button(v, text= ' TABLERO INICIAL ', bd= 5, bg= 'goldenrod2',width= 15, command= posicion_inicial)
 btn.place(x= 1000, y= 110)
 
 btn1 = tk.Button(v, text= 'BORRAR TABLERO ', bd= 5, bg= 'goldenrod2',width= 15, command= borrar_posicion)
