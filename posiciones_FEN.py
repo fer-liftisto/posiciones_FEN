@@ -8,6 +8,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import tablero
+import configuracionTablero
 
 def posicion_inicial():
     
@@ -136,7 +137,17 @@ def pasar_derecha(): ########(pasarPosicion) ############
     tablero.introiduce_en_tablero(fen_posicion) # funcion del modulo tablero 
 
 def pasar_izquierda():
-    pass
+    # trabajando en ello $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    tabli= []
+    for  v in tablero.cuadro.values():
+        contenido= v.cget('text'),v.cget('fg')
+       
+        if contenido[0] in configuracionTablero.PIEZAS:
+            if contenido[1] == configuracionTablero.COLOR_PIEZA_BLANCA:
+                tabli.append(contenido)
+
+    print(tabli)
+
 
 def anadir_posicion():
     pass
@@ -181,10 +192,10 @@ lb = tk.Listbox(v, width= 15, height= 8, bd= 10, font= 'arial 20', bg= 'yellow')
 lb.place(x= 130, y= 110)
 ##########################################################################################################
 btn = tk.Button(v, text= ' >> ', bd= 5, bg= 'goldenrod2',width= 4, command= pasar_derecha)
-btn.place(x= 395, y= 200)
+btn.place(x= 395, y= 200) # Realizado y funcionando
 
 btn = tk.Button(v, text= ' << ', bd= 5, bg= 'goldenrod2',width= 4, command= pasar_izquierda)
-btn.place(x= 395, y= 300)
+btn.place(x= 395, y= 300) # Realizar en pasar posicion
 ###########################################################################################################
 lba_parametros = tk.Label(v, text= 'PARAMETROS', bd= 5, bg= 'goldenrod2', width= 11)
 lba_parametros.place(x=130, y=410)

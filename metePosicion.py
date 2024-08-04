@@ -9,7 +9,9 @@ from configuracionTablero import *
 
 ###################################################################
 def posicion(fen_posicion):
-    
+    '''
+    Realza la combersion de FEN a una matriz de 8 x 8
+    '''
     #FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - 0 1'
     partida= fen_posicion.get() # es una StringVar
     
@@ -41,8 +43,12 @@ def posicion(fen_posicion):
     ##############################
     tabli = devuelve_fila(fila)
     ###########################################################################
+    for fila in tabli:
+        print(fila)
     return tabli
 
+def tablero_A_fen():
+     pass
 
 def traduce(f):
     # '♟♜♞♝♛♚' #
