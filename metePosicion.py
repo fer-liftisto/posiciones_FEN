@@ -50,7 +50,7 @@ def posicion(fen_posicion):
 def tablero_A_fen():
      pass
 
-def traduce(f):
+def traduce_replace(f):
     # '♟♜♞♝♛♚' #
     f = f.replace('R', '♜')
     f = f.replace('N', '♞')
@@ -67,4 +67,45 @@ def traduce(f):
     f = f.replace('p', '♟')
     return f
 
+def traduce(pieza):
+    idioma = 'sn'
+    if idioma == 'sn' : 
+        a_sinbolo= {'R': '♜',
+                    'N': '♞',
+                    'B': '♝',
+                    'Q': '♛',
+                    'K': '♚',
+                    'P': '♟',
 
+                    'r': '♜',
+                    'n': '♞',
+                    'b': '♝',
+                    'q': '♛',
+                    'k': '♚',
+                    'p': '♟',
+                    ' ': ' '}
+    
+        return  a_sinbolo[pieza]
+    
+    elif idioma == 'sp' :
+        
+        '''Queda arreglar la coronacion'''
+        
+        a_sp=  {'R': 'T',
+                'N': 'C',
+                'B': 'A',
+                'Q': 'D',
+                'K': 'R',
+                'P': 'P',
+
+                'r': 'T',
+                'n': 'C',
+                'b': 'A',
+                'q': 'D',
+                'k': 'R',
+                'p': 'P',
+                ' ': ' '}
+        
+        return  a_sp[pieza]
+
+     
