@@ -20,8 +20,8 @@ def tablero(table,LADO):
     ##########################
     def aleatorio(table,LADO):
         # Genera casilla aleatoria
-        c= choice('abcdefgh')
-        f= choice('87654321')
+        c= choice(COLUMNAS)
+        f= choice(FILAS)
         ale.set(c+f)
 
         # Muestra la casilla Aleatoria
