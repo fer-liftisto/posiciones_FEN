@@ -14,13 +14,13 @@ def posicion(fen_posicion):
     '''
     #FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - 0 1'
     partida= fen_posicion.get() # es una StringVar
-    
-    
     print(partida)
+    
     def devuelve_posicion(partida):
             nombre, torne, FEN, confi = partida.split(',')
             filas = FEN.split('/')
             return filas
+        
         ############################
     fila = devuelve_posicion(partida)
         #####################################################################
@@ -43,8 +43,10 @@ def posicion(fen_posicion):
     ##############################
     tabli = devuelve_fila(fila)
     ###########################################################################
+    # Es para visualizar tablero
     for fila in tabli:
-        print(fila)
+        print('yo soy',fila)
+    
     return tabli
 
 def tablero_A_fen():
@@ -68,7 +70,7 @@ def traduce_replace(f):
     return f
 
 def traduce(pieza):
-    idioma = 'sn'
+    idioma = 'sp'
     if idioma == 'sn' : 
         a_sinbolo= {'R': '♜',
                     'N': '♞',
