@@ -1,6 +1,4 @@
   anadir_posicion
-  arreglarDimensionTablero
-  master
-  pasarPosicion
-  tablero_inicial
-* traducePosicion 
+* master
+  pasarPosicion 
+  traducePosicion 
