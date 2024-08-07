@@ -70,7 +70,7 @@ def traduce_replace(f):
     return f
 
 def traduce(pieza):
-    idioma = 'sp'
+    idioma = 'sn'
     if idioma == 'sn' : 
         a_sinbolo= {'R': '♜',
                     'N': '♞',

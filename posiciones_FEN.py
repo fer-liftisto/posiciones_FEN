@@ -140,7 +140,7 @@ def pasar_izquierda():
     # trabajando en ello $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     tabli= []
     for  v in tablero.cuadro.values():
-        contenido= v.cget('text'),v.cget('fg')
+        contenido= v.cget('text'),v.cget('fg') # Es una tupla
        
         if contenido[0] in configuracionTablero.PIEZAS:
             if contenido[1] == configuracionTablero.COLOR_PIEZA_BLANCA:
