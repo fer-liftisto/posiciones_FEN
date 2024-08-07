@@ -1,0 +1,11 @@
+
+  master
+  pasarPosicion     (no hecho merge con master)
+*  traducePosicion  (   hecho merge con master) <pendiente poner inicial castellano para coronar>
+  añadir posicion                    <pendiente sin crear rama>
+  crear planillas en formato excel   <pendiente sin crear rama>
+
+  
+  
+  merge              <=> unir
+  Already up to date <=> Ya está actualizado
