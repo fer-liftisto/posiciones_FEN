@@ -19,8 +19,7 @@ def tablero(app):
 	
 	table = Frame(app)
 	table.place(x=455,y=15)
-	table.config(width=LADO*8, height=LADO*9,bd=10,bg='goldenrod2')
-	
+	table.config(width=LADO*9, height=LADO*9,bd=10,bg='goldenrod2')
 	
 	quita = BooleanVar(value=True)
 	
@@ -29,6 +28,7 @@ def tablero(app):
 	
 	grande = IntVar()
 	grande.set(LADO//2)
+	
 	def promueve(menu_coronar, corona):
 		pieza.set(menu_coronar[corona].cget('text'))
 		# Para borrar las pizas de coronacion

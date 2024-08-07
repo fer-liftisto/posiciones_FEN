@@ -1,0 +1,4 @@
+  anadir_posicion
+* master
+  pasarPosicion 
+  traducePosicion 

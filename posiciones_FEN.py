@@ -8,6 +8,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import tablero
+import configuracionTablero
 
 def posicion_inicial():
     
@@ -17,6 +18,15 @@ def posicion_inicial():
     lb.delete(0, tk.END) # para que quede bacio
     for index, fila in enumerate(posicion):
         lb.insert(index, fila)
+
+def tablero_inicial():
+    fen_posicion.set('N-N,_,rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR,_') # es una StringVar()
+    tablero.introiduce_en_tablero(fen_posicion) # funcion del modulo tablero 
+
+def borrar_tablero():
+    fen_posicion.set('N-N,_,8/8/8/8/8/8/8/8,_') # es una StringVar()
+    tablero.introiduce_en_tablero(fen_posicion)
+
 ##########################################################################################################
 def borrar_posicion():
         lb.delete(0,tk.END)
@@ -111,11 +121,33 @@ def cargar_FEN():
             lb_fen.insert(tk.END,partida)
 
 def pasar_derecha(): ########(pasarPosicion) ############
-    fen_posicion.set('N-N,_,rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR,_') # es una StringVar()
+    FEN= list(lb.get(0, tk.END))
+    posicion= '/'.join(FEN)
+     
+    if jugadores.get() == '':
+        jugadores.set('N-N')
+    if torneo.get() == '':
+        torneo.set('_')
+    if parametros.get() == '':
+        parametros.set('_')
+     
+    FEN= f'{jugadores.get()},{torneo.get()},{posicion},{parametros.get()}'
+    
+    fen_posicion.set(FEN) # es una StringVar()
     tablero.introiduce_en_tablero(fen_posicion) # funcion del modulo tablero 
 
 def pasar_izquierda():
-    pass
+    # trabajando en ello $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    tabli= []
+    for  v in tablero.cuadro.values():
+        contenido= v.cget('text'),v.cget('fg')
+       
+        if contenido[0] in configuracionTablero.PIEZAS:
+            if contenido[1] == configuracionTablero.COLOR_PIEZA_BLANCA:
+                tabli.append(contenido)
+
+    print(tabli)
+
 
 def anadir_posicion():
     pass
@@ -160,10 +192,10 @@ lb = tk.Listbox(v, width= 15, height= 8, bd= 10, font= 'arial 20', bg= 'yellow')
 lb.place(x= 130, y= 110)
 ##########################################################################################################
 btn = tk.Button(v, text= ' >> ', bd= 5, bg= 'goldenrod2',width= 4, command= pasar_derecha)
-btn.place(x= 395, y= 200)
+btn.place(x= 395, y= 200) # Realizado y funcionando
 
 btn = tk.Button(v, text= ' << ', bd= 5, bg= 'goldenrod2',width= 4, command= pasar_izquierda)
-btn.place(x= 395, y= 300)
+btn.place(x= 395, y= 300) # Realizar en pasar posicion
 ###########################################################################################################
 lba_parametros = tk.Label(v, text= 'PARAMETROS', bd= 5, bg= 'goldenrod2', width= 11)
 lba_parametros.place(x=130, y=410)
@@ -217,10 +249,11 @@ lb_fen = tk.Listbox(v, width= 85, height= 12, bd= 10,
                     font= 'arial 15', bg= 'yellow')
 lb_fen.place(x= 30, y= 660)
 ##########################################################################################################
-btn = tk.Button(v, text= ' TABLERO INICIAL ', bd= 5, bg= 'goldenrod2',width= 15, command= posicion_inicial)
-btn.place(x= 1000, y= 110) ####  tablero_inicial #######
+btn = tk.Button(v, text= 'TABLERO INICIAL ', bd= 5, bg= 'goldenrod2',width= 15, command= tablero_inicial)
+btn.place(x= 1030, y= 110)
 
-btn1 = tk.Button(v, text= ' BORRAR TABLERO ', bd= 5, bg= 'goldenrod2',width= 15, command= borrar_posicion)
-btn1.place(x= 1000, y= 150)
+btn1 = tk.Button(v, text= 'BORRAR TABLERO', bd= 5, bg= 'goldenrod2',width= 15, command= borrar_tablero)
+btn1.place(x= 1030, y= 150)
 ##############################################################################################################
 v.mainloop()
+# tablero inicial echo acer commit y merge con master
