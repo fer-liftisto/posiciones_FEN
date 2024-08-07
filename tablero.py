@@ -29,16 +29,26 @@ def tablero(app):
 	grande = IntVar()
 	grande.set(LADO//2)
 	
+	def pieza_corona():
+		pieza='' 
+		for pie in 'RNBQ':
+			pi = traduce(idioma,pie)
+			pieza += pi
+		return pieza
+	
+	def pieza_corona_peon():
+		return traduce(idioma,'P')
+	
 	def promueve(menu_coronar, corona):
 		pieza.set(menu_coronar[corona].cget('text'))
 		# Para borrar las pizas de coronacion
-		piezas = '♜♞♝♛'
+		piezas = pieza_corona()
+		
 		for corona in piezas:
 			# Borra las piezas para coronar
 			menu_coronar[corona].place_forget()
 			#
 	#######################################################################
-
 
 	def mueve(cuadro, casilla):
 
@@ -55,11 +65,15 @@ def tablero(app):
 									fg=color.get())
 	############################################################
 	##corona########
-			if (casilla[1] == '1' or casilla[1] == '8') and pieza.get() == PEON:
+			if (casilla[1] == '1' or casilla[1] == '8') and pieza.get() == pieza_corona_peon():
 				menu_coronar = dict()
-				piezas = '♜♞♝♛'
+				
+				
+				piezas = pieza_corona() #crear funcion para traducir al idioma que este la pieza
+				
+				
 				for indice, corona in enumerate(piezas):
-					##
+					## crea las piezas para coronar
 					menu_coronar[corona] = Button(table,
 												text=corona,
 												font=(LETRA, grande.get()),
@@ -118,12 +132,12 @@ def introiduce_en_tablero(fen_posicion):
 		for c, co in enumerate(COLUMNAS):
 				casilla = co + fi
 				if tabli[f][c].islower():
-					tabli[f][c] = traduce(tabli[f][c])
+					tabli[f][c] = traduce(idioma,tabli[f][c]) # Pone idioma de piezas
 					cuadro[casilla].configure(text=tabli[f][c],
 											font=(LETRA, grande.get()),
 											fg=COLOR_PIEZA_NEGRA)
 				else:
-					tabli[f][c] = traduce(tabli[f][c])
+					tabli[f][c] = traduce(idioma,tabli[f][c])
 					cuadro[casilla].configure(text=tabli[f][c],
 											font=(LETRA, grande.get()),
 											fg=COLOR_PIEZA_BLANCA)
