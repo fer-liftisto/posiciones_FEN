@@ -25,3 +25,5 @@ COLOR_PIEZA_BLANCA = 'blue'
 COLOR_PIEZA_NEGRA = 'black'
 
 cuadro = dict()
+
+idioma = 'sn'
