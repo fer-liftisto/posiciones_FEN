@@ -1,7 +1,7 @@
 
   master
-*  pasarPosicion (hecho merge con master)
-  traducePosicion                    <pendiente poner inicial castellano para coronar>
+  pasarPosicion (no hecho merge con master)
+*  traducePosicion                    <pendiente poner inicial castellano para coronar>
   añadir posicion                    <pendiente sin crear rama>
   crear planillas en formato excel   <pendiente sin crear rama>
 
