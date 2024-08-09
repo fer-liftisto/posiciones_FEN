@@ -1,1 +1,8 @@
 ramas/seguimiento.txt
+CAMISETA.JPG
+CAMISETA.ico
+Lib/
+Scripts/
+__pycache__/
+pyvenv.cfg
+tempCodeRunnerFile.py
