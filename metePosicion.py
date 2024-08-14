@@ -10,7 +10,7 @@ from configuracionTablero import *
 ###################################################################
 def posicion(fen_posicion):
     '''
-    Realza la combersion de FEN a una matriz de 8 x 8
+    Realiza la combersion de FEN a una matriz de 8 x 8
     '''
     #FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w - 0 1'
     partida= fen_posicion.get() # es una StringVar
@@ -45,12 +45,49 @@ def posicion(fen_posicion):
     ###########################################################################
     # Es para visualizar tablero
     for fila in tabli:
-        print('yo soy',fila)
+        print(fila)
     
     return tabli
 
-def tablero_A_fen():
-     pass
+def tablero_A_fen(contenido):
+    def fen_fila(fila):
+        fila= ''.join(fila) # covierte en string
+        con= 0 # Contador de espacios
+        fen= '' # posición FEN
+        for i, v in enumerate(fila):
+                if v == ' ':
+                    con += 1
+                    
+                    try:
+                        if fila[i+1] != ' ':
+                            fen += str(con)
+                    except:
+                        fen += str(con)
+                        
+                elif v != ' ':
+                    fen += v
+                    con = 0
+
+        return fen
+
+
+    def tablero_fen(table):	
+        inicio = 0 # indice del slice
+        fin = 8
+        fen = ''
+        for i in range(0,64,8):
+            ''' 
+            Para coger filas de 8 elementos 
+            '''
+            inicio = i   # Para manejar el slice
+            fin = i + 8  # Para manejar el slice
+            aux = table[inicio:fin] # Toma 8 elementos
+
+            fen += fen_fila(aux) + '/' # muestra la posicion fen
+        return fen[:-1] # quita el ultimo /
+    
+    return tablero_fen(contenido)
+
 
 def traduce_replace(f):
     # '♟♜♞♝♛♚' #
@@ -91,23 +128,45 @@ def traduce(idioma,pieza):
     
     elif idioma == 'sp' :
         
-        '''Queda arreglar la coronacion'''
-        
-        a_sp=  {'R': 'T',
-                'N': 'C',
-                'B': 'A',
-                'Q': 'D',
-                'K': 'R',
-                'P': 'P',
+        a_sp=  {    'R': 'T',
+                    'N': 'C',
+                    'B': 'A',
+                    'Q': 'D',
+                    'K': 'R',
+                    'P': 'P',
 
-                'r': 'T',
-                'n': 'C',
-                'b': 'A',
-                'q': 'D',
-                'k': 'R',
-                'p': 'P',
-                ' ': ' '}
+                    'r': 'T',
+                    'n': 'C',
+                    'b': 'A',
+                    'q': 'D',
+                    'k': 'R',
+                    'p': 'P',
+                    ' ': ' '    }
         
         return  a_sp[pieza]
 
+
+def traduce_ing(idioma,pieza):
+
+    if idioma == 'sn':
+        if pieza[1] == COLOR_PIEZA_BLANCA:
+            
+            a_ing = {   '♜': 'R',
+                        '♞': 'N',
+                        '♝': 'B',
+                        '♛': 'Q',
+                        '♚': 'K',
+                        '♟': 'P',
+                        ' ': ' '    }
+        if pieza[1] == COLOR_PIEZA_NEGRA:
+                    
+            a_ing = {   '♜': 'r',
+                        '♞': 'n',
+                        '♝': 'b',
+                        '♛': 'q',
+                        '♚': 'k',
+                        '♟': 'p',
+                        ' ': ' '    }
+
+        return a_ing[pieza[0]]
      

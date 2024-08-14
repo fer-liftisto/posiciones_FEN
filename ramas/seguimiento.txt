@@ -1,9 +1,8 @@
 
 -------------------------------------------------------------------------------------
 *  master
-  pasarPosicion (no hecho merge con master)
-  añadir posicion                    <pendiente sin crear rama>
-  crear planillas en formato excel   <pendiente sin crear rama>
+   añadir posicion                    <pendiente sin crear rama>
+   crear planillas en formato excel   <pendiente sin crear rama>
 
   
  ------------------------------------------------------------------------------------- 

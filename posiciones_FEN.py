@@ -9,12 +9,12 @@ import tkinter as tk
 from tkinter import messagebox
 import tablero
 import configuracionTablero
-
+import metePosicion
 def posicion_inicial():
     
     posicion= 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR'
     posicion= posicion.split('/')
-    
+    print(posicion)
     lb.delete(0, tk.END) # para que quede bacio
     for index, fila in enumerate(posicion):
         lb.insert(index, fila)
@@ -138,15 +138,22 @@ def pasar_derecha(): ########(pasarPosicion) ############
 
 def pasar_izquierda():
     # trabajando en ello $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-    tabli= []
-    for  v in tablero.cuadro.values():
+    tabli= [] 
+    for v in tablero.cuadro.values():
         contenido= v.cget('text'),v.cget('fg') # Es una tupla
-       
-        if contenido[0] in configuracionTablero.PIEZAS:
-            if contenido[1] == configuracionTablero.COLOR_PIEZA_BLANCA:
-                tabli.append(contenido)
+    
+        tabli.append(metePosicion.traduce_ing(
+                    configuracionTablero.idioma, contenido))
+      
+    table= metePosicion.tablero_A_fen(tabli)       
+    posicion = table
+    posicion = posicion.split('/')
+    print(posicion)
+    lb.delete(0, tk.END)  # para que quede bacio
+    for index, fila in enumerate(posicion):
+        lb.insert(index, fila)
 
-    print(tabli)
+
 
 
 def anadir_posicion():
@@ -256,4 +263,4 @@ btn1 = tk.Button(v, text= 'BORRAR TABLERO', bd= 5, bg= 'goldenrod2',width= 15, c
 btn1.place(x= 1030, y= 150)
 ##############################################################################################################
 v.mainloop()
-# tablero inicial echo acer commit y merge con master
+
