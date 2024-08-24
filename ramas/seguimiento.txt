@@ -1,7 +1,7 @@
 
 -------------------------------------------------------------------------------------
-*  master
-   añadir posicion                    <pendiente sin crear rama>
+   master
+*  añadir posicion                    <meter posiciones en el tablero>
    crear planillas en formato excel   <pendiente sin crear rama>
 
   

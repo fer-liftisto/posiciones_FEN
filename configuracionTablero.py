@@ -1,3 +1,4 @@
+
 '''
 2654 ♔ WHITE CHESS KING
 2655 ♕ WHITE CHESS QUEEN
@@ -12,6 +13,8 @@
 265E ♞ BLACK CHESS KNIGHT
 265F ♟ BLACK CHESS PAWN
 '''
+import tkinter as tk
+
 COLUMNAS = 'abcdefgh'
 FILAS = '87654321'
 PIEZAS = '♜♞♝♛♚♝♞♜'
@@ -25,5 +28,9 @@ COLOR_PIEZA_BLANCA = 'blue'
 COLOR_PIEZA_NEGRA = 'black'
 
 cuadro = dict()
+escaque = list()
+
 
 idioma = 'sn'
+
+

@@ -47,7 +47,7 @@ def posicion(fen_posicion):
     for fila in tabli:
         print(fila)
     
-    return tabli
+    return tabli # es una lista de listas
 
 def tablero_A_fen(contenido):
     def fen_fila(fila):

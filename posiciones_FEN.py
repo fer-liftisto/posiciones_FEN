@@ -8,8 +8,10 @@
 import tkinter as tk
 from tkinter import messagebox
 import tablero
-import configuracionTablero
+import configuracionTablero as confiT
 import metePosicion
+from functools import partial
+
 def posicion_inicial():
     
     posicion= 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR'
@@ -54,6 +56,7 @@ def sustituir_fila():
         lb.delete(index)
         lb.insert(index,fila.get())
         fila.set('')
+
 ##########################################################################################################
 def anadir_FEN():
     FEN= list(lb.get(0, tk.END))
@@ -70,9 +73,7 @@ def anadir_FEN():
     lb_fen.insert(tk.END,FEN)
      
     borrar_posicion()
-     
-     
-    
+        
 def visualizar_FEN():
     index = lb_fen.curselection()
     if not index:
@@ -137,13 +138,15 @@ def pasar_derecha(): ########(pasarPosicion) ############
     tablero.introiduce_en_tablero(fen_posicion) # funcion del modulo tablero 
 
 def pasar_izquierda():
-    # trabajando en ello $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    ''' Pasa de posicion tablero a posicion FEN'''
+    
     tabli= [] 
     for v in tablero.cuadro.values():
         contenido= v.cget('text'),v.cget('fg') # Es una tupla
     
         tabli.append(metePosicion.traduce_ing(
-                    configuracionTablero.idioma, contenido))
+            # confiT apodo de configuracionTablero
+            confiT.idioma, contenido))
       
     table= metePosicion.tablero_A_fen(tabli)       
     posicion = table
@@ -153,15 +156,10 @@ def pasar_izquierda():
     for index, fila in enumerate(posicion):
         lb.insert(index, fila)
 
-
-
-
-def anadir_posicion():
-    pass
 ###########################################################################################################
 ###  MAIN  ###
 #######################################################################################################
-v=tk.Tk()
+v= tk.Tk()
 v.geometry('1200x1000+15+15')
 #img=tk.PhotoImage(file='CAMISETA.JPG')
 v.title('VISOR FEN')
@@ -177,6 +175,13 @@ fen_posicion= tk.StringVar()
 #fen_posicion.set(f'{jugadores.get()},{torneo.get()},{FEN},{parametros.get()}')
 
 fila= tk.StringVar()
+
+pieza = tk.StringVar()
+
+color = tk.StringVar()
+color.set('#dfc07f')
+
+
 
 ##########################################################################################################
 # para colocar el tablero
@@ -199,10 +204,10 @@ lb = tk.Listbox(v, width= 15, height= 8, bd= 10, font= 'arial 20', bg= 'yellow')
 lb.place(x= 130, y= 110)
 ##########################################################################################################
 btn = tk.Button(v, text= ' >> ', bd= 5, bg= 'goldenrod2',width= 4, command= pasar_derecha)
-btn.place(x= 395, y= 200) # Realizado y funcionando
+btn.place(x= 395, y= 200) 
 
 btn = tk.Button(v, text= ' << ', bd= 5, bg= 'goldenrod2',width= 4, command= pasar_izquierda)
-btn.place(x= 395, y= 300) # Realizar en pasar posicion
+btn.place(x= 395, y= 300) 
 ###########################################################################################################
 lba_parametros = tk.Label(v, text= 'PARAMETROS', bd= 5, bg= 'goldenrod2', width= 11)
 lba_parametros.place(x=130, y=410)
@@ -239,10 +244,11 @@ btn_borrar = tk.Button(v, text= 'Borrar FEN ', bd= 5,
                        bg= 'goldenrod2', width= 15, command= borrar_FEN)
 btn_borrar.place(x= 1000, y= 810)
 
-btn_mostrar= tk.Button(v, text= 'Añadir Posicion ',
-                        bd=5, bg= 'goldenrod2',width= 15, command= anadir_posicion)
+''' trabajando 
+btn_mostrar= tk.Button(v, text= 'Añadir Posicion ', 
+                       bd=5, bg='goldenrod2', width=15) #, command= anadir_posicion)
 btn_mostrar.place(x= 650, y= 615)
-
+'''
 ####################################################################################################
 btn_guardar = tk.Button(v, text='Guardar FEN ', bd= 5,
                        bg= 'goldenrod2', width= 15, command= guardar_FEN)
