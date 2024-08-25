@@ -32,11 +32,10 @@ def tablero(app):
 	
 	seleccion = StringVar()
 	color_seleccion =StringVar()
-	col=StringVar()
+
 	poner_pieza=BooleanVar()
-	poner_pieza.set(False)
+	poner_pieza.set(True)
 	
-	''' probar aqui '''
 	def pieza_introduce():
 		pieza = ''  # Para poder concatenar <pieza += pi>
 		color=[]
@@ -57,67 +56,67 @@ def tablero(app):
 		color_seleccion.set(menu_posicion[pon].cget('fg'))
 		print(menu_posicion[pon].cget('fg'))
 		poner_pieza.set(True)
+
 		
 	def piezas_mete_posicion():
 		''' Genera el menu para meter posiciones '''
-		menu_posicion = dict()
-
 		piezas, color = pieza_introduce()
-		b = -1 
-		n = -1
-		print(color)
-		for indice, pon in enumerate(piezas):
-			valor = pon + str(indice)
-			if color[indice]:	
-				b += 1
-				# crea las piezas para introducir
-				menu_posicion[valor] = Button(table,
+		
+		global menu_posicion 
+		menu_posicion = dict()
+		
+		if poner_pieza.get():
+			
+			b = -1 
+			n = -1
+		
+			for indice, pon in enumerate(piezas):
+				
+				if color[indice]:	
+					b += 1
+					valor = pon + str(indice)
+					# crea las piezas para introducir
+					menu_posicion[valor] = Button(table,
                                  text=pon,
                                  font=(LETRA, grande.get()),
                                     fg='blue',
                                  command= partial(introduce,
                                       menu_posicion, valor))
-	
-				menu_posicion[valor].place(x= b*LADO,
+					
+					menu_posicion[valor].place(x= b*LADO,
                               y=LADO*8,
                               width=LADO,
                               height=LADO)
 				
-			else:	
-				n += 1
-				menu_posicion[valor] = Button(table,
+				else:	
+					n += 1
+					valor = pon + str(indice)
+					menu_posicion[valor] = Button(table,
                                     text=pon,
                                     font=(LETRA, grande.get()),
                                     fg='black',
                                     command= partial(introduce,
                                             menu_posicion, valor))
 
-				menu_posicion[valor].place(x= n*LADO,
+					menu_posicion[valor].place(x= n*LADO,
                                     y=LADO*9,
                                     width=LADO,
                                     height=LADO)
 				
-
-				
-
-	def menu_mete_posicion():# Botones mete posicion xxxxxxxxx
-		print("funcion menu_mete_posicion")
-		indice1= 7
-		mete_posicion = Button(table,
-                                text='Editar',
-                         		bg='goldenrod2',
-								fg='red',
-                				command = piezas_mete_posicion)
-	##
-		mete_posicion.place(x= indice1*LADO,
-                             y= LADO*8,
-                             width= LADO,
-                             height= 2* LADO)
+		poner_pieza.set(True)
 		
-		
-	
-	
-	
+	def pieza_quita_posicion():
+			
+			piezas, color = pieza_introduce()
+			for indice, pon in enumerate(piezas):
+				valor = pon+str(indice)
+				print(valor)
+				menu_posicion[valor].place_forget()
+				poner_pieza.set(False)
+				#menu_posicion[valor].place_forget()
+				######xxxxxxxx		
+	###################################################################################
+	###################################################################################
 	def pieza_corona():
 		pieza='' # Para poder concatenar <pieza += pi>
 		for pie in 'RNBQ':
@@ -133,60 +132,64 @@ def tablero(app):
 		# Para borrar las pizas de coronacion
 		piezas = pieza_corona()
 
-		for corona in piezas:
+		for borra in piezas:
 			# Borra las piezas para coronar
-			menu_coronar[corona].place_forget()  # Para borrar el menu de coronacion
+			menu_coronar[borra].place_forget()  # Para borrar el menu de coronacion
 			#
 	#######################################################################
 
 	def mueve(cuadro, casilla):
+		if not poner_pieza.get():
+			if quita.get():
+				quita.set(False)
+				pieza.set(cuadro[casilla].cget('text'))
+				color.set(cuadro[casilla].cget('fg'))
+				# Cuadro viene de configuracionTablero
+				cuadro[casilla].configure(text=' ')
 
-		if quita.get():
-			quita.set(False)
-			pieza.set(cuadro[casilla].cget('text'))
-			color.set(cuadro[casilla].cget('fg'))
-			# Cuadro viene de configuracionTablero
-			cuadro[casilla].configure(text=' ')
-
-		else:
-			quita.set(True)
-			cuadro[casilla].configure(text=pieza.get(),
-									font=(LETRA, grande.get()),
-									fg=color.get())
-	############################################################
-	##corona########
-			if (casilla[1] == '1' or casilla[1] == '8') and (pieza.get() == pieza_corona_peon()) :
-				menu_coronar = dict()
-					
-				piezas = pieza_corona() 
 				
-				for indice, corona in enumerate(piezas):
-					## crea las piezas para coronar
-					menu_coronar[corona] = Button(table,
-												text=corona,
+			else:
+				quita.set(True)
+				cuadro[casilla].configure(text=pieza.get(),
+										font=(LETRA, grande.get()),
+										fg=color.get())
+						
+		############################################################
+		##corona########
+				if (casilla[1] == '1' or casilla[1] == '8') and (pieza.get() == pieza_corona_peon()) :
+					menu_coronar = dict()
+						
+					piezas = pieza_corona() 
+					
+					for indice, corona in enumerate(piezas):
+						## crea las piezas para coronar
+						menu_coronar[corona] = Button(table,
+													text=corona,
+													font=(LETRA, grande.get()),
+													fg=color.get(),
+													command=partial(promueve,
+																	menu_coronar, corona))
+		
+		##
+						menu_coronar[corona].place(x=indice*LADO,
+													y=LADO*8,
+													width=LADO,
+													height=LADO)
+
+						## Coloca la pieza coronada
+						cuadro[casilla].configure(text=pieza.get(),
 												font=(LETRA, grande.get()),
-												fg=color.get(),
-												command=partial(promueve,
-																menu_coronar, corona))
-	
-	##
-					menu_coronar[corona].place(x=indice*LADO,
-												y=LADO*8,
-												width=LADO,
-												height=LADO)
-
-					## Coloca la pieza coronada
-					cuadro[casilla].configure(text=pieza.get(),
-											font=(LETRA, grande.get()),
-											fg=color.get())
-		''' Mete posiciones '''
-		if poner_pieza.get():
-
-			cuadro[casilla].configure(text= seleccion.get(),
-                            font= (LETRA, grande.get()),
-                            fg= color_seleccion.get() )
+												fg=color.get())
 			
+		if poner_pieza.get():
+			''' Mete posiciones '''
+			cuadro[casilla].configure(text=seleccion.get(),
+                             font=(LETRA, grande.get()),
+                             fg=color_seleccion.get())
+			seleccion.set(' ')
 			poner_pieza.set(False)
+
+
 
 	# ############################################################
 		
@@ -224,8 +227,32 @@ def tablero(app):
 									y=(f)*LADO, 
 									width=LADO, 
 									height=LADO)
+	''' Boton para meter posiciones '''
 	
-	menu_mete_posicion() # Para los botones de meter posiciones ##########xxxxxxxxx
+	indice1 = 7
+	mete_posicion = Button(table,
+                        text='Editar',
+                        bg='goldenrod2',
+                        fg='red',
+                        command= piezas_mete_posicion)
+	##
+	mete_posicion.place(x=indice1*LADO,
+                     y=LADO*8,
+                     width=LADO,
+                     height=2 * LADO)
+
+	indice1 = 8
+	mete_posicion = Button(table,
+                        text='Editar',
+                        bg='goldenrod2',
+                        fg='red',
+                        command= pieza_quita_posicion)
+	##
+	mete_posicion.place(x=indice1*LADO,
+                     y=LADO*8,
+                     width=LADO,
+                     # Para los botones de meter posiciones ##########xxxxxxxxx
+                     height=2 * LADO)
 	###############################################################################
 
 ''' Mismo nivel que funcion tablero'''
