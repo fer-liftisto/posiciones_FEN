@@ -34,7 +34,7 @@ def tablero(app):
 	color_seleccion =StringVar()
 
 	poner_pieza=BooleanVar()
-	poner_pieza.set(True)
+	poner_pieza.set(False)
 	
 	def pieza_introduce():
 		pieza = ''  # Para poder concatenar <pieza += pi>
@@ -60,12 +60,14 @@ def tablero(app):
 		
 	def piezas_mete_posicion():
 		''' Genera el menu para meter posiciones '''
+		poner_pieza.set(True) #x#
+		
 		piezas, color = pieza_introduce()
 		
 		global menu_posicion 
 		menu_posicion = dict()
 		
-		if poner_pieza.get():
+		if poner_pieza.get():#x#
 			
 			b = -1 
 			n = -1
@@ -103,16 +105,15 @@ def tablero(app):
                                     width=LADO,
                                     height=LADO)
 				
-		poner_pieza.set(True)
+		
 		
 	def pieza_quita_posicion():
-			
-			piezas, color = pieza_introduce()
+			poner_pieza.set(False)
+			piezas, _ = pieza_introduce()
 			for indice, pon in enumerate(piezas):
 				valor = pon+str(indice)
-				print(valor)
 				menu_posicion[valor].place_forget()
-				poner_pieza.set(False)
+			
 				#menu_posicion[valor].place_forget()
 				######xxxxxxxx		
 	###################################################################################
@@ -140,6 +141,7 @@ def tablero(app):
 
 	def mueve(cuadro, casilla):
 		if not poner_pieza.get():
+			
 			if quita.get():
 				quita.set(False)
 				pieza.set(cuadro[casilla].cget('text'))
@@ -182,12 +184,13 @@ def tablero(app):
 												fg=color.get())
 			
 		if poner_pieza.get():
+			
 			''' Mete posiciones '''
 			cuadro[casilla].configure(text=seleccion.get(),
                              font=(LETRA, grande.get()),
                              fg=color_seleccion.get())
 			seleccion.set(' ')
-			poner_pieza.set(False)
+			#poner_pieza.set(False)
 
 
 
@@ -242,13 +245,13 @@ def tablero(app):
                      height=2 * LADO)
 
 	indice1 = 8
-	mete_posicion = Button(table,
+	quita_posicion = Button(table,
                         text='Editar',
                         bg='goldenrod2',
-                        fg='red',
+                        fg='blue',
                         command= pieza_quita_posicion)
 	##
-	mete_posicion.place(x=indice1*LADO,
+	quita_posicion.place(x=indice1*LADO,
                      y=LADO*8,
                      width=LADO,
                      # Para los botones de meter posiciones ##########xxxxxxxxx
