@@ -121,7 +121,7 @@ def cargar_FEN():
         for partida in partidas:
             lb_fen.insert(tk.END,partida)
 
-def pasar_derecha(): ########(pasarPosicion) ############
+def pasar_derecha():
     FEN= list(lb.get(0, tk.END))
     posicion= '/'.join(FEN)
      
@@ -244,11 +244,6 @@ btn_borrar = tk.Button(v, text= 'Borrar FEN ', bd= 5,
                        bg= 'goldenrod2', width= 15, command= borrar_FEN)
 btn_borrar.place(x= 1000, y= 810)
 
-''' trabajando 
-btn_mostrar= tk.Button(v, text= 'Añadir Posicion ', 
-                       bd=5, bg='goldenrod2', width=15) #, command= anadir_posicion)
-btn_mostrar.place(x= 650, y= 615)
-'''
 ####################################################################################################
 btn_guardar = tk.Button(v, text='Guardar FEN ', bd= 5,
                        bg= 'goldenrod2', width= 15, command= guardar_FEN)

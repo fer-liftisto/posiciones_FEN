@@ -8,10 +8,7 @@ from functools import partial
 from configuracionTablero import *
 from metePosicion import *
 
-##############
-
-
-
+############################
 ############################
 
 def tablero(app):	
@@ -39,7 +36,7 @@ def tablero(app):
 	def pieza_introduce():
 		pieza = ''  # Para poder concatenar <pieza += pi>
 		color=[]
-		for pie in 'RNBQKPrnbqkp ':
+		for pie in 'RNBQKPrnbqkp':
 			if pie.islower():
 				col = True
 			else:
@@ -48,74 +45,69 @@ def tablero(app):
 			
 			pi = traduce(idioma, pie)
 			pieza += pi
-		print(pieza)
+	
 		return pieza,color
 
 	def introduce(menu_posicion, pon):
 		seleccion.set(menu_posicion[pon].cget('text'))
 		color_seleccion.set(menu_posicion[pon].cget('fg'))
-		print(menu_posicion[pon].cget('fg'))
 		poner_pieza.set(True)
 
 		
 	def piezas_mete_posicion():
 		''' Genera el menu para meter posiciones '''
-		poner_pieza.set(True) #x#
+		poner_pieza.set(True) 
 		
 		piezas, color = pieza_introduce()
 		
 		global menu_posicion 
 		menu_posicion = dict()
 		
-		if poner_pieza.get():#x#
+		if poner_pieza.get():
 			
-			b = -1 
-			n = -1
+			colocar_blancas = -1 
+			colocar_negras = -1
 		
 			for indice, pon in enumerate(piezas):
 				
 				if color[indice]:	
-					b += 1
+					colocar_blancas += 1
 					valor = pon + str(indice)
 					# crea las piezas para introducir
 					menu_posicion[valor] = Button(table,
-                                 text=pon,
-                                 font=(LETRA, grande.get()),
-                                    fg='blue',
-                                 command= partial(introduce,
+                                text=pon,
+                                font=(LETRA, grande.get()),
+                                fg='blue',
+                                command= partial(introduce,
                                       menu_posicion, valor))
 					
-					menu_posicion[valor].place(x= b*LADO,
-                              y=LADO*8,
-                              width=LADO,
-                              height=LADO)
+					menu_posicion[valor].place(x= colocar_blancas*LADO,
+                              	y=LADO*8,
+                              	width=LADO,
+                              	height=LADO)
 				
 				else:	
-					n += 1
+					colocar_negras += 1
 					valor = pon + str(indice)
 					menu_posicion[valor] = Button(table,
-                                    text=pon,
-                                    font=(LETRA, grande.get()),
-                                    fg='black',
-                                    command= partial(introduce,
+                                text=pon,
+                                font=(LETRA, grande.get()),
+                                fg='black',
+                                command= partial(introduce,
                                             menu_posicion, valor))
 
-					menu_posicion[valor].place(x= n*LADO,
-                                    y=LADO*9,
-                                    width=LADO,
-                                    height=LADO)
-				
-		
-		
+					menu_posicion[valor].place(x= colocar_negras * LADO,
+                                y=LADO*9,
+                                width=LADO,
+                                height=LADO)
+					
 	def pieza_quita_posicion():
 			poner_pieza.set(False)
 			piezas, _ = pieza_introduce()
 			for indice, pon in enumerate(piezas):
 				valor = pon+str(indice)
 				menu_posicion[valor].place_forget()
-			
-				#menu_posicion[valor].place_forget()
-				######xxxxxxxx		
+	
 	###################################################################################
 	###################################################################################
 	def pieza_corona():
@@ -148,8 +140,7 @@ def tablero(app):
 				color.set(cuadro[casilla].cget('fg'))
 				# Cuadro viene de configuracionTablero
 				cuadro[casilla].configure(text=' ')
-
-				
+	
 			else:
 				quita.set(True)
 				cuadro[casilla].configure(text=pieza.get(),
@@ -180,22 +171,18 @@ def tablero(app):
 
 						## Coloca la pieza coronada
 						cuadro[casilla].configure(text=pieza.get(),
-												font=(LETRA, grande.get()),
-												fg=color.get())
+													font=(LETRA, grande.get()),
+													fg=color.get())
 			
 		if poner_pieza.get():
 			
 			''' Mete posiciones '''
 			cuadro[casilla].configure(text=seleccion.get(),
-                             font=(LETRA, grande.get()),
-                             fg=color_seleccion.get())
+                             			font=(LETRA, grande.get()),
+                             			fg=color_seleccion.get())
 			seleccion.set(' ')
-			#poner_pieza.set(False)
-
-
 
 	# ############################################################
-		
 	################################################################################################
 	''' Cuerpo de la funcion tablero '''
 	##TABLERO###################
@@ -213,49 +200,49 @@ def tablero(app):
 										command = partial(mueve, cuadro, casilla)) # llama a mueve(cuadro,casilla)
 
 				cuadro[escaque[-1]].place(
-									x=(c)*LADO,
-									y=(f)*LADO,
-									width=LADO,
-									height=LADO)
+										x=(c)*LADO,
+										y=(f)*LADO,
+										width=LADO,
+										height=LADO)
 
 			else:
 				cuadro[escaque[-1]] = Button(table,
 										text = ' ',
 										bg = COLOR_NEGRO,
-                                    # llama a mueve(cuadro,casilla)
-                                    command=partial(mueve, cuadro, casilla))
+                                   	 	# llama a mueve(cuadro,casilla)
+                                    	command=partial(mueve, cuadro, casilla))
 
 				cuadro[escaque[-1]].place(
-									x=(c)*LADO,
-									y=(f)*LADO, 
-									width=LADO, 
-									height=LADO)
+										x=(c)*LADO,
+										y=(f)*LADO, 
+										width=LADO, 
+										height=LADO)
 	''' Boton para meter posiciones '''
 	
-	indice1 = 7
+	indice1 = 6
 	mete_posicion = Button(table,
-                        text='Editar',
+                        text='Editar Posicion',
                         bg='goldenrod2',
                         fg='red',
                         command= piezas_mete_posicion)
 	##
-	mete_posicion.place(x=indice1*LADO,
-                     y=LADO*8,
-                     width=LADO,
-                     height=2 * LADO)
+	mete_posicion.place(x= indice1*LADO,
+                     	y= LADO*8,
+                    	width= 2*LADO,
+                    	height= LADO)
 
-	indice1 = 8
+	#indice1 = 8
 	quita_posicion = Button(table,
-                        text='Editar',
+                        text='Pegar Posicion',
                         bg='goldenrod2',
                         fg='blue',
                         command= pieza_quita_posicion)
 	##
 	quita_posicion.place(x=indice1*LADO,
-                     y=LADO*8,
-                     width=LADO,
-                     # Para los botones de meter posiciones ##########xxxxxxxxx
-                     height=2 * LADO)
+                     	y=LADO*9,
+                     	width= 2*LADO,
+                    	# Para los botones de meter posiciones ##########xxxxxxxxx
+                     	height= LADO)
 	###############################################################################
 
 ''' Mismo nivel que funcion tablero'''
@@ -278,35 +265,6 @@ def introiduce_en_tablero(fen_posicion):
 					cuadro[casilla].configure(text=tabli[f][c],
 											font=(LETRA, grande.get()),
 											fg=COLOR_PIEZA_BLANCA)
-
-
-''' trabajando '''
-# def menu_mete_posicion():
-# 	print("funcion menu_mete_posicion")
-	
-# 	menu_coronar = dict()
-	
-# 	grande = IntVar()
-# 	grande.set(LADO//2)
-	
-# 	piezas = 'RNBQRP'
-
-# 	for indice, corona in enumerate(piezas):
-# 		# crea las piezas para coronar
-# 		menu_coronar[corona] = Button(tablero.table,
-#                                text= corona,
-#                                font= (LETRA, tablero.grande.get()),
-#                                fg= tablero.color.get(),
-#                                )
-# 	##
-# 		menu_coronar[corona].place(x=indice*LADO,
-#                             y=LADO*8,
-#                             width=LADO,
-#                             height=LADO)
-
-
-
-
 
 '''
 app = Tk()

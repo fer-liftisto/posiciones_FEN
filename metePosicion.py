@@ -44,8 +44,8 @@ def posicion(fen_posicion):
     tabli = devuelve_fila(fila)
     ###########################################################################
     # Es para visualizar tablero
-    for fila in tabli:
-        print(fila)
+    # for fila in tabli:
+    #     print(fila)
     
     return tabli # es una lista de listas
 
