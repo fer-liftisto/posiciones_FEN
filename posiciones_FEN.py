@@ -11,6 +11,7 @@ import tablero
 import configuracionTablero as confiT
 import metePosicion
 from functools import partial
+import os
 
 def borrar_metadatos():
     jugadores.set('')
@@ -109,19 +110,39 @@ def borrar_FEN():
         lb_fichero.delete(index)
         
 def guardar_FEN():
-    with open('posiciones_fen.txt', 'w') as fichero:
+    if '.txt' in guardar.get(): 
+        try :
+            with open(guardar.get(), 'w') as fichero:
             
-        partidas= lb_fichero.get(0,tk.END)
-        for elemento in partidas:
-            fichero.writelines(elemento+'\n')
-            print('Elemento',elemento)
-        lb_fichero.delete(0, tk.END)
+                partidas= lb_fichero.get(0,tk.END)
+                for elemento in partidas:
+                    fichero.writelines(elemento+'\n')
+                lb_fichero.delete(0, tk.END)
     
-    messagebox.showinfo('GUARDAR FEN', message='Las posiciones han sido guardadas')
+            messagebox.showinfo('GUARDAR FEN', message='Las posiciones han sido guardadas')
+        except:
+            messagebox.showinfo(
+                'GUARDAR FEN', message='Las posiciones no han sido guardadas')
+    else:
+        pass
 
 def cargar_FEN():
+    # carga lista de ficheros
+    fichero_txt = [fichero for fichero in os.listdir() if 'txt' in fichero]
+    for archivo in fichero_txt:
+        lb_archivo.insert(tk.END,archivo)
     
-    with open('posiciones_fen.txt', 'r') as fichero:
+    # selecciona el fichero
+    lb_fichero.delete(0, tk.END)
+    index = lb_archivo.curselection()
+    if not index:
+        return
+    else:
+        fichero = str(lb_archivo.get(index))
+    lb_archivo.delete(0, tk.END)
+    
+    # abre fichero seleccionado
+    with open(fichero, 'r') as fichero:
 
         partidas= fichero.read()
         lista_partidas= partidas.split('\n') # combierte a lista
@@ -179,6 +200,7 @@ v.config(bd= 10, bg= 'goldenrod3')
 jugadores= tk.StringVar()
 torneo= tk.StringVar()
 parametros= tk.StringVar()
+guardar= tk.StringVar()
 
 fen_posicion= tk.StringVar()
 #fen_posicion.set(f'{jugadores.get()},{torneo.get()},{FEN},{parametros.get()}')
@@ -257,11 +279,20 @@ btn_borrar.place(x= 1000, y= 810)
 ############################# FICHEROS #############################################################
 btn_guardar = tk.Button(v, text='Guardar FEN ', bd= 5,
                        bg= 'goldenrod2', width= 15, command= guardar_FEN)
-btn_guardar.place(x= 130, y= 470)
-
+btn_guardar.place(x= 3, y= 460)
+#####
+ent_guardar = tk.Entry(v, textvariable=guardar,
+                        bd=5, bg='goldenrod2', width=24)
+ent_guardar.place(x=130, y=460)
+#############
 btn_cargar = tk.Button(v, text= 'Cargar FEN ', bd= 5,
                         bg= 'goldenrod2', width= 15, command= cargar_FEN)
-btn_cargar.place(x= 260, y= 470)
+btn_cargar.place(x= 3, y= 510)
+#####
+lb_archivo = tk.Listbox(v, width=20, height=3, bd=10, # lista de archivos txt con posiciones fen
+                        font='arial 15', bg='yellow')
+lb_archivo.place(x=130, y=510)
+
 ##################################################################################################
 lb_fichero = tk.Listbox(v, width= 85, height= 12, bd= 10,
                     font= 'arial 15', bg= 'yellow')

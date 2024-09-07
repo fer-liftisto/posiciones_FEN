@@ -231,7 +231,6 @@ def tablero(app):
                     	width= 2*LADO,
                     	height= LADO)
 
-	#indice1 = 8
 	quita_posicion = Button(table,
                         text='Pegar Posicion',
                         bg='goldenrod2',
