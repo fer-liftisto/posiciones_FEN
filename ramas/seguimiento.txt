@@ -1,9 +1,12 @@
 
+video sobre FEN y PGN
+https://youtu.be/lkytnBLrLr8?si=y1HubWbpneShh6Hd
 -------------------------------------------------------------------------------------
-   master
-*  añadir posicion                    <meter posiciones en el tablero>
+ * master
+   rellenar fichero.txt
+   realizado => añadir posicion                    <meter posiciones en el tablero>
    crear planillas en formato excel   <pendiente sin crear rama>
-
+   
   
  ------------------------------------------------------------------------------------- 
   merge              <=> unir

@@ -1,2 +1,5 @@
+posicion inicial,_,rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR,_
+caro kann,_,rnbqkbnr/pp2pppp/2p5/3pP3/3P4/8/PPP2PPP/RNBQKBNR,_
+gambito dama,_,rnbqkb1r/ppp2ppp/4pn2/3p2B1/2PP4/2N5/PP2PPPP/R2QKBNR,_
+gambito englu,_,r1b1kbnr/pppp1ppp/2n5/4P3/1q3B2/5N2/PPP1PPPP/RN1QKB1R,_
 N-N,_,rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR,_
-
